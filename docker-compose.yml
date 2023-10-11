@@ -1,0 +1,28 @@
+version: '3'
+services:
+  ghost:
+    image: ghost:4
+    restart: always
+    ports:
+      - "2368:2368"  # Porta para acessar o Ghost
+    environment:
+      NODE_ENV: production
+    volumes:
+      - ./data:/var/lib/ghost/content
+
+  custom_app:
+    image: rebaeoliveira/ghost:latest
+    restart: always
+    ports:
+      - "8080:8080"  # Porta para acessar sua aplicação personalizada
+    volumes:
+      - ./app_data:/app/data  # Volume para persistência de dados da sua aplicação
+
+  another_service:
+    image: mysql:5.7
+    restart: always
+    ports:
+      - "8081:3306"  # Porta para acessar o MySQL
+    volumes:
+      - ./mysql_data:/var/lib/mysql  # Volume para persistência de dados do MySQL
+
