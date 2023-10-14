@@ -1,0 +1,36 @@
+version: '3'
+services:
+  ghost:
+    image: rebaeoliveira/ghost:latest
+    profiles: ["ghost"]
+    restart: always
+    ports:
+      - "2368:2368"
+    environment:
+      NODE_ENV: production
+    volumes:
+      - ./data:/var/lib/ghost/content
+
+  cache:
+    image: nginx:latest
+    profiles: ["cache"]
+    restart: always
+    ports:
+      - "8080:80"
+    volumes:
+      - ./data:/var/lib/ghost
+
+  mysql:
+    image: mysql:latest
+    profiles: ["mysql"]
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ghost_root
+      MYSQL_DATABASE: ghost
+      MYSQL_USER: ghost
+      MYSQL_PASSWORD: ghost
+    ports:
+      - "8081:3306"
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+
