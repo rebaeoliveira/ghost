@@ -6,6 +6,7 @@
 - **Ghost**: Sistema para o gerenciamento do conteúdo;
 - **Nginx**: Sistema para cache e proxy reverso;
 - **MySQL**: Sistema de banco de dados.
+- **Portainer**: Sistema de gerenciamento dos contêineres em ambiente web.
   
 ### Pré-requisitos:
 Instalar os seguintes componentes:
@@ -30,4 +31,5 @@ Clonar este repositório:
 ## Acesso ao Sistema:
 - **Ghost**: http://localhost:2368
 - **Nginx**: http://localhost:8080
+- **Portainer**: http://localhost:9000
 - **MySQL**: Não é necessário acessar diretamente pois é utilizado pelo Ghost.
