@@ -2,7 +2,6 @@ version: '3'
 services:
   ghost:
     image: rebaeoliveira/ghost:latest
-    profiles: ["ghost"]
     restart: always
     ports:
       - "2368:2368"
@@ -13,16 +12,14 @@ services:
 
   cache:
     image: nginx:latest
-    profiles: ["cache"]
     restart: always
     ports:
       - "8080:80"
     volumes:
-      - ./data:/var/lib/ghost
+      - ./cache:/var/lib/ghost
 
   mysql:
     image: mysql:latest
-    profiles: ["mysql"]
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ghost_root
@@ -33,4 +30,16 @@ services:
       - "8081:3306"
     volumes:
       - ./mysql_data:/var/lib/mysql
+
+  portainer:
+    image: portainer/portainer-ce:latest
+    restart: always
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./portainer_data:/var/lib/portainer
+
+networks:
+  default:
+    name: ghost-network
 
